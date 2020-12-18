@@ -9,22 +9,22 @@ use App\Service\VerificationService;
 
 class VerificationController extends Controller
 {
-    use UserService, VerificationService;
+	use UserService, VerificationService;
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param UserRequest $request
-     *
-     * @return string|null
-     */
-    public function store(UserRequest $request): ?string
-    {
-        $email    = $request->post('email');
-        $password = $request->post('password');
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param UserRequest $request
+	 *
+	 * @return string|null
+	 */
+	public function store(UserRequest $request): ?string
+	{
+		$email    = $request->post('email');
+		$password = $request->post('password');
 
-        return $this->verify($email, $password)
-            ? $this->login($request, $email)
-            : null;
-    }
+		return $this->verify($email, $password)
+			? $this->login($request, $email)
+			: null;
+	}
 }
