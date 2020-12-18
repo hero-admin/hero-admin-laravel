@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Service\UserService;
 use App\Service\VerificationService;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Response;
 
 class VerificationController extends Controller
 {
@@ -18,9 +16,9 @@ class VerificationController extends Controller
      *
      * @param UserRequest $request
      *
-     * @return Collection|Response|bool|null
+     * @return string|null
      */
-    public function store(UserRequest $request): Collection|Response|bool|null
+    public function store(UserRequest $request): ?string
     {
         $email    = $request->post('email');
         $password = $request->post('password');

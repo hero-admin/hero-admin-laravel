@@ -9,19 +9,31 @@ use Illuminate\Support\Facades\Hash;
 
 trait VerificationService
 {
-    use UserRepository;
+	use UserRepository;
 
-    public function verify(string $email, string|int $password): bool
-    {
-        $res          = $this->getByEmail($email);
-        $hashPassword = $res->password;
+	/**
+	 * @param string     $email
+	 * @param string|int $password
+	 *
+	 * @return bool
+	 *
+	 */
+	public function verify(string $email, string|int $password): bool
+	{
+		$res          = $this->getByEmail($email);
+		$hashPassword = $res->password;
 
-        return Hash::check($password, $hashPassword);
-    }
+		return Hash::check($password, $hashPassword);
+	}
 
-    public function getByEmail($value): Builder|Model
-    {
-        return $this->email($value)
-                    ->firstOrFail();
-    }
+	/**
+	 * @param $value
+	 *
+	 * @return Builder|Model
+	 */
+	public function getByEmail($value): Builder|Model
+	{
+		return $this->email($value)
+		            ->firstOrFail();
+	}
 }
