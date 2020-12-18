@@ -11,24 +11,22 @@ use Illuminate\Http\Response;
 
 class VerificationController extends Controller
 {
+    use UserService, VerificationService;
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param UserRequest         $request
-     * @param VerificationService $verificationService
-     * @param UserService         $userService
+     * @param UserRequest $request
      *
      * @return Collection|Response|bool|null
      */
-    public function store(UserRequest $request,
-                          VerificationService $verificationService,
-                          UserService $userService): Collection|Response|bool|null
+    public function store(UserRequest $request): Collection|Response|bool|null
     {
         $email    = $request->post('email');
         $password = $request->post('password');
 
-        return $verificationService->verify($email, $password)
-            ? $userService->login($request, $email)
+        return $this->verify($email, $password)
+            ? $this->login($request, $email)
             : null;
     }
 }

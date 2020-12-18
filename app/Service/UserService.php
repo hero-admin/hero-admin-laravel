@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-class UserService
+trait UserService
 {
     public function login($request, $value)
     {

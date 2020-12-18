@@ -3,21 +3,13 @@
 namespace App\Service;
 
 use App\Repository\UserRepository;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 
-class VerificationService
+trait VerificationService
 {
-
-    /**
-     * @var UserRepository
-     */
-    private UserRepository $userRepository;
-
-    public function __construct(UserRepository $userRepository)
-    {
-        $this->userRepository = $userRepository;
-    }
+    use UserRepository;
 
     public function verify(string $email, string|int $password): bool
     {
@@ -27,9 +19,9 @@ class VerificationService
         return Hash::check($password, $hashPassword);
     }
 
-    public function getByEmail($value): Collection|array|UserService
+    public function getByEmail($value): Builder|Model
     {
-        return $this->userRepository->email($value)
-                                    ->firstOrFail();
+        return $this->email($value)
+                    ->firstOrFail();
     }
 }
