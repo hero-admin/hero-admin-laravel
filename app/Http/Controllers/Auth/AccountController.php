@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -12,11 +16,11 @@ class AccountController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return JsonResponse
+     * @return JsonResponse|string
      */
-    public function index(): JsonResponse
+    public function index(): JsonResponse|null
     {
-        return response()->json(['github' => '123']);
+        return User::all();
     }
 
     /**
@@ -24,11 +28,11 @@ class AccountController extends Controller
      *
      * @param Request $request
      *
-     * @return Response
+     * @return Model|array|Collection|Response|Builder
      */
-    public function store(Request $request)
+    public function store(Request $request): Model|array|Collection|Response|Builder
     {
-        //
+        return User::query()->create($request->all())->get();
     }
 
     /**
@@ -36,11 +40,11 @@ class AccountController extends Controller
      *
      * @param int $id
      *
-     * @return Response
+     * @return Builder|Builder[]|Collection|Model|Response
      */
-    public function show($id)
+    public function show(int $id): Model|Collection|Response|Builder|array
     {
-        //
+        return User::query()->findOrFail($id);
     }
 
     /**
@@ -49,11 +53,11 @@ class AccountController extends Controller
      * @param Request $request
      * @param int     $id
      *
-     * @return Response
+     * @return bool|Response|int
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): Response|bool|int
     {
-        //
+        return User::query()->findOrFail($id)->update($request->all());
     }
 
     /**
@@ -61,10 +65,10 @@ class AccountController extends Controller
      *
      * @param int $id
      *
-     * @return Response
+     * @return Response|int
      */
-    public function destroy($id)
+    public function destroy(int $id): Response|int
     {
-        //
+        return User::destroy($id);
     }
 }
