@@ -29,6 +29,7 @@ class VerificationService
 
     public function getByEmail($value): Collection|array|UserService
     {
-        return $this->userRepository->email($value)->firstOrFail();
+        return $this->userRepository->email($value)
+                                    ->firstOrFail();
     }
 }
