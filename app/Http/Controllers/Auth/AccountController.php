@@ -32,7 +32,9 @@ class AccountController extends Controller
      */
     public function store(Request $request): Model|array|Collection|Response|Builder
     {
-        return User::query()->create($request->all())->get();
+        return User::query()
+                   ->create($request->all())
+                   ->get();
     }
 
     /**
@@ -44,7 +46,8 @@ class AccountController extends Controller
      */
     public function show(int $id): Model|Collection|Response|Builder|array
     {
-        return User::query()->findOrFail($id);
+        return User::query()
+                   ->findOrFail($id);
     }
 
     /**
@@ -57,7 +60,9 @@ class AccountController extends Controller
      */
     public function update(Request $request, int $id): Response|bool|int
     {
-        return User::query()->findOrFail($id)->update($request->all());
+        return User::query()
+                   ->findOrFail($id)
+                   ->update($request->all());
     }
 
     /**

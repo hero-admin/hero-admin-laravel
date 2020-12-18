@@ -31,12 +31,16 @@ class VerificationController extends Controller
      *
      * @return Collection|Response|bool|null
      */
-    public function store(UserRequest $request, VerificationService $verificationService, UserService $userService): Collection|Response|bool|null
+    public function store(UserRequest $request,
+                          VerificationService $verificationService,
+                          UserService $userService): Collection|Response|bool|null
     {
         $email    = $request->post('email');
         $password = $request->post('password');
 
-        return $verificationService->verify($email, $password) ? $userService->login($request, $email) : null;
+        return $verificationService->verify($email, $password)
+            ? $userService->login($request, $email)
+            : null;
     }
 
     /**

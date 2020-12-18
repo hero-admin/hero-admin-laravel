@@ -34,18 +34,34 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
-    protected $middleware = [// \App\Http\Middleware\TrustHosts::class,
-                             TrustProxies::class, HandleCors::class, PreventRequestsDuringMaintenance::class, ValidatePostSize::class, TrimStrings::class, ConvertEmptyStringsToNull::class,];
+    protected $middleware
+        = [// \App\Http\Middleware\TrustHosts::class,
+           TrustProxies::class,
+           HandleCors::class,
+           PreventRequestsDuringMaintenance::class,
+           ValidatePostSize::class,
+           TrimStrings::class,
+           ConvertEmptyStringsToNull::class,
+        ];
 
     /**
      * The application's route middleware groups.
      *
      * @var array
      */
-    protected $middlewareGroups = ['web' => [EncryptCookies::class, AddQueuedCookiesToResponse::class, StartSession::class, // \Illuminate\Session\Middleware\AuthenticateSession::class,
-                                             ShareErrorsFromSession::class, VerifyCsrfToken::class, SubstituteBindings::class,],
+    protected $middlewareGroups
+        = [
+            'web' => [
+                EncryptCookies::class,
+                AddQueuedCookiesToResponse::class,
+                StartSession::class, // \Illuminate\Session\Middleware\AuthenticateSession::class,
+                ShareErrorsFromSession::class,
+                VerifyCsrfToken::class,
+                SubstituteBindings::class,
+            ],
 
-                                   'api' => ['throttle:api', SubstituteBindings::class,],];
+            'api' => ['throttle:api', SubstituteBindings::class,],
+        ];
 
     /**
      * The application's route middleware.
@@ -54,5 +70,16 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
-    protected $routeMiddleware = ['auth' => Authenticate::class, 'auth.basic' => AuthenticateWithBasicAuth::class, 'cache.headers' => SetCacheHeaders::class, 'can' => Authorize::class, 'guest' => RedirectIfAuthenticated::class, 'password.confirm' => RequirePassword::class, 'signed' => ValidateSignature::class, 'throttle' => ThrottleRequests::class, 'verified' => EnsureEmailIsVerified::class,];
+    protected $routeMiddleware
+        = [
+            'auth'             => Authenticate::class,
+            'auth.basic'       => AuthenticateWithBasicAuth::class,
+            'cache.headers'    => SetCacheHeaders::class,
+            'can'              => Authorize::class,
+            'guest'            => RedirectIfAuthenticated::class,
+            'password.confirm' => RequirePassword::class,
+            'signed'           => ValidateSignature::class,
+            'throttle'         => ThrottleRequests::class,
+            'verified'         => EnsureEmailIsVerified::class,
+        ];
 }

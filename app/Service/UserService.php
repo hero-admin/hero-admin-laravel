@@ -6,6 +6,7 @@ class UserService
 {
     public function login($request, $value)
     {
-        return $request->user()->createToken($value);
+        return $request->user()
+                       ->createToken($value);
     }
 }
