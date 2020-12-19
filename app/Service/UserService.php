@@ -2,17 +2,21 @@
 
 namespace App\Service;
 
+use App\Repository\UserRepository;
+
 trait UserService
 {
+	use UserRepository;
+
 	/**
-	 * @param $request
 	 * @param $value
 	 *
-	 * @return string
+	 * @return object
 	 */
-	public function login($request, $value): string
+	public function login($value): object
 	{
-		return $request->user()
-		               ->createToken($value)->plainTextToken;
+		$user = $this->email($value)
+		             ->first();
+		return $user->createToken($value);
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\AccountController;
 use App\Http\Controllers\Auth\VerificationController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +15,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('verification', [VerificationController::class, 'store']);
 
-Route::middleware('auth:api')
-     ->get('/user',
-         function (Request $request) {
-             return $request->user();
-         });
+Route::middleware(['auth:sanctum'])
+     ->name('api')
+     ->group(function () {
+	     Route::prefix('account')
+	          ->group(function () {
+		          /**
+		           * verification
+		           */
+		          Route::prefix('verification')
+		               ->group(function () {
+			               Route::apiResource('/', VerificationController::class);
+			               Route::post('/', [VerificationController::class, 'store'])
+			                    ->withoutMiddleware('auth:sanctum');
+		               });
+
+		          /**
+		           * account
+		           */
+		          Route::apiResource('/', AccountController::class);
+	          });
+     });
+

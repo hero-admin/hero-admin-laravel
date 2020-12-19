@@ -16,11 +16,11 @@ class AccountController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 *
-	 * @return JsonResponse|string
+	 * @return JsonResponse
 	 */
-	public function index(): JsonResponse|null
+	public function index(): JsonResponse
 	{
-		return User::all();
+		return \response()->json(User::all());
 	}
 
 	/**

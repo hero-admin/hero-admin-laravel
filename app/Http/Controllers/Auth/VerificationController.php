@@ -12,43 +12,20 @@ class VerificationController extends Controller
 	use UserService, VerificationService;
 
 	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @OA\Post(
-	 * path="/verification",
-	 * description="Auth Account",
-	 * @OA\Parameter(
-	 *  name="Email",
-	 *  required=true,
-	 *  in="path",
-	 *  @OA\Schema(
-	 *    type="string"
-	 *  )
-	 * ),
-	 * @OA\Parameter(
-	 *  name="Password",
-	 *  required=true,
-	 *  in="path",
-	 *  @OA\Schema(
-	 *    type="string"
-	 *  )
-	 * ),
-	 * @OA\Response(response="200", description="Plant Text Token")
-	 * )
+	 * Verify an account
 	 *
 	 * @param UserRequest $request
 	 *
-	 * @return string|null
-	 *@property string $email
-	 *
+	 * @return object
+	 * @property string   $email
 	 */
-	public function store(UserRequest $request): ?string
+	public function store(UserRequest $request): object
 	{
 		$email    = $request->post("email");
 		$password = $request->post("password");
 
 		return $this->verify($email, $password)
-			? $this->login($request, $email)
-			: null;
+			? $this->login($email)
+			: response()->json('Resource not found', 404);
 	}
 }
