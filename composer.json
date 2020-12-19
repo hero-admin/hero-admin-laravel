@@ -9,13 +9,14 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
+        "ext-pdo": "*",
+        "darkaonline/l5-swagger": "^8.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/sanctum": "^2.8",
-        "laravel/tinker": "^2.5",
-        "ext-pdo": "*"
+        "laravel/tinker": "^2.5"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

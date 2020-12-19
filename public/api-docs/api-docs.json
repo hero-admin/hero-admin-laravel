@@ -1,0 +1,43 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Vuetify Admin API",
+        "description": "Built with Laravel",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/verification": {
+            "post": {
+                "summary": "Store a newly created resource in storage.",
+                "description": "Auth Account",
+                "operationId": "App\\Http\\Controllers\\Auth\\VerificationController::store",
+                "parameters": [
+                    {
+                        "name": "Email",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Password",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Plant Text Token"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

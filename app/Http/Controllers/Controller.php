@@ -9,5 +9,12 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
+	/**
+	 * @OA\Info(
+	 *      version="1.0.0",
+	 *      title="Vuetify Admin API",
+	 *      description="Built with Laravel"
+	 * )
+	 */
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }
