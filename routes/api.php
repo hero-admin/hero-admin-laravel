@@ -26,7 +26,7 @@ Route::middleware(['auth:sanctum'])
 		           */
 		          Route::prefix('verification')
 		               ->group(function () {
-			               Route::apiResource('/', VerificationController::class);
+			               Route::delete('/', [VerificationController::class, 'revocation']);
 			               Route::post('/', [VerificationController::class, 'store'])
 			                    ->withoutMiddleware('auth:sanctum');
 		               });

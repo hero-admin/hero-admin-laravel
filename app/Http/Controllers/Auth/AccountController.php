@@ -20,7 +20,7 @@ class AccountController extends Controller
 	 */
 	public function index(): JsonResponse
 	{
-		return \response()->json(User::all());
+		return response()->json(User::all());
 	}
 
 	/**

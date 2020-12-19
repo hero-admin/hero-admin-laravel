@@ -15,8 +15,20 @@ trait UserService
 	 */
 	public function login($value): object
 	{
-		$user = $this->email($value)
-		             ->first();
-		return $user->createToken($value);
+		return $this->firstUserByEmail($value)
+		            ->createToken($value);
+	}
+
+	public function firstUserByEmail($value): ?object
+	{
+		return $this->email($value)
+		            ->first();
+	}
+
+	public function logout($value): int
+	{
+		return $this->firstUserByEmail($value)
+		            ->tokens()
+		            ->delete();
 	}
 }

@@ -6,6 +6,7 @@ use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\PreventRequestsDuringMaintenance;
 use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Middleware\ResponseStructure;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\TrustProxies;
 use App\Http\Middleware\VerifyCsrfToken;
@@ -60,7 +61,7 @@ class Kernel extends HttpKernel
 				SubstituteBindings::class,
 			],
 
-			'api' => ['throttle:api', SubstituteBindings::class,],
+			'api' => ['throttle:api', SubstituteBindings::class, ResponseStructure::class],
 		];
 
 	/**

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Service\UserService;
 use App\Service\VerificationService;
+use Illuminate\Http\JsonResponse;
 
 class VerificationController extends Controller
 {
@@ -27,5 +28,14 @@ class VerificationController extends Controller
 		return $this->verify($email, $password)
 			? $this->login($email)
 			: response()->json('Resource not found', 404);
+	}
+
+	public function revocation(UserRequest $request): JsonResponse
+	{
+		$email = $request->user()->email;
+
+		return $this->logout($email)
+			? response()->json('Token is revocation')
+			: response()->json('Server error', 500);
 	}
 }
