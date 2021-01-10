@@ -18,7 +18,7 @@ class VerificationService
 	 */
 	public function verify(string $email, string|int $password): bool
 	{
-		$res          = $this->email($email)
+		$res          = $this->whereByEmail($email)
 		                     ->firstOrFail();
 		$hashPassword = $res->password;
 

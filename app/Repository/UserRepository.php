@@ -24,7 +24,7 @@ trait UserRepository
 	 *
 	 * @return $this
 	 */
-	public function email(string $value): UserRepository
+	public function whereByEmail(string $value): UserRepository
 	{
 		$this->user = $this->user->where('email', $value);
 		return $this;
@@ -35,7 +35,7 @@ trait UserRepository
 	 *
 	 * @return $this
 	 */
-	public function password(string|int $value): UserRepository
+	public function whereByPassword(string|int $value): UserRepository
 	{
 		$this->user = $this->user->where('password', $value);
 		return $this;

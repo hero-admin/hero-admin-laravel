@@ -19,12 +19,22 @@ class UserService
 		            ->createToken($value);
 	}
 
+	/**
+	 * @param $value
+	 *
+	 * @return object|null
+	 */
 	public function firstUserByEmail($value): ?object
 	{
-		return $this->email($value)
+		return $this->whereByEmail($value)
 		            ->first();
 	}
 
+	/**
+	 * @param $value
+	 *
+	 * @return int
+	 */
 	public function logout($value): int
 	{
 		return $this->firstUserByEmail($value)
