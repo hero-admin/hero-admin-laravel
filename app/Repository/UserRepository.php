@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 
 trait UserRepository
 {
+	/**
+	 * @var Builder
+	 */
 	private Builder $user;
 
 	/**
@@ -24,9 +27,9 @@ trait UserRepository
 	 *
 	 * @return $this
 	 */
-	public function whereByEmail(string $value): UserRepository
+	public function whereByEmail(string $value): static
 	{
-		$this->user = $this->user->where('email', $value);
+		$this->user->where('email', $value);
 		return $this;
 	}
 
@@ -35,9 +38,9 @@ trait UserRepository
 	 *
 	 * @return $this
 	 */
-	public function whereByPassword(string|int $value): UserRepository
+	public function whereByPassword(string|int $value): static
 	{
-		$this->user = $this->user->where('password', $value);
+		$this->user->where('password', $value);
 		return $this;
 	}
 
