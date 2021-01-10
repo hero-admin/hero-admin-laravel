@@ -22,9 +22,9 @@ class UserRequest extends FormRequest
 	 *
 	 * @return array
 	 */
-	#[ArrayShape(['email' => "string", 'name' => "string", 'password' => "string"])]
+	#[ArrayShape(['email' => "required|string", 'password' => "required|string"])]
 	public function rules(): array
 	{
-		return ['email' => 'string', 'name' => 'string', 'password' => 'string|numeric'];
+		return ['email' => 'required|string|email', 'password' => 'required|string'];
 	}
 }
