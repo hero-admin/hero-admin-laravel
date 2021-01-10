@@ -4,7 +4,7 @@ namespace App\Service;
 
 use App\Repository\UserRepository;
 
-trait UserService
+class UserService
 {
 	use UserRepository;
 

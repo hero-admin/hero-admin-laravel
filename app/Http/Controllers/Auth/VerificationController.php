@@ -10,31 +10,39 @@ use Illuminate\Http\JsonResponse;
 
 class VerificationController extends Controller
 {
-	use UserService, VerificationService;
-
 	/**
 	 * Verify an account
 	 *
-	 * @param UserRequest $request
+	 * @param UserRequest         $request
+	 * @param UserService         $userService
+	 * @param VerificationService $verificationService
 	 *
 	 * @return object
-	 * @property string   $email
+	 * @property string           $email
 	 */
-	public function store(UserRequest $request): object
+	public function store(UserRequest $request,
+	                      UserService $userService,
+	                      VerificationService $verificationService): object
 	{
 		$email    = $request->post("email");
 		$password = $request->post("password");
 
-		return $this->verify($email, $password)
-			? $this->login($email)
+		return $verificationService->verify($email, $password)
+			? $userService->login($email)
 			: response()->json('Resource not found', 404);
 	}
 
-	public function revocation(UserRequest $request): JsonResponse
+	/**
+	 * @param UserRequest $request
+	 * @param UserService $userService
+	 *
+	 * @return JsonResponse
+	 */
+	public function revocation(UserRequest $request, UserService $userService): JsonResponse
 	{
 		$email = $request->user()->email;
 
-		return $this->logout($email)
+		return $userService->logout($email)
 			? response()->json('Token is revocation')
 			: response()->json('Server error', 500);
 	}

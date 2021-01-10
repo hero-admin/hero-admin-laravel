@@ -5,7 +5,7 @@ namespace App\Service;
 use App\Repository\UserRepository;
 use Illuminate\Support\Facades\Hash;
 
-trait VerificationService
+class VerificationService
 {
 	use UserRepository;
 
