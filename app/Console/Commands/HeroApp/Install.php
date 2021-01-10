@@ -43,6 +43,9 @@ class Install extends Command
 		$this->info('Copy .env file...');
 		exec('php -r "file_exists(\'.env\') || copy(\'.env.example\', \'.env\');"');
 
+		$this->info('Generate App Key...');
+		exec('php artisan key:generate --ansi');
+
 		$this->info('Success Install');
 		return 0;
 	}
