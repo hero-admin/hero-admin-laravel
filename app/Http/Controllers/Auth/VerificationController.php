@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Adapter\VerificationAdapter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Service\UserService;
-use App\Service\VerificationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -23,8 +23,9 @@ class VerificationController extends Controller
 	 *
 	 * @param UserRequest         $request
 	 * @param UserService         $userService
-	 * @param VerificationService $verificationService
+	 * @param VerificationAdapter $verificationAdapter
 	 *
+	 * @return object
 	 * @response {
 	 * "accessToken": {
 	 * "name": "deven.stiedemann@example.net",
@@ -43,18 +44,16 @@ class VerificationController extends Controller
 	 * @response 404 {
 	 *  "message": "Resource not found"
 	 * }
-	 * @return object
 	 */
 	public function store(UserRequest $request,
-	                      UserService $userService,
-	                      VerificationService $verificationService): object
+	                      VerificationAdapter $verificationAdapter): object
 	{
 		$email    = $request->post("email");
 		$password = $request->post("password");
 
-		return $verificationService->verify($email, $password)
-			? $userService->login($email)
-			: response()->json('Resource not found', 404);
+		return $verificationAdapter->driver('common')
+		                           ->verify($email, $password);
+
 	}
 
 	/**
