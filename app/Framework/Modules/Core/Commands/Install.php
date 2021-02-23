@@ -2,7 +2,7 @@
 
 namespace App\Framework\Modules\Core\Commands;
 
-use App\Framework\Modules\Core\Services\File\CopyService;
+use App\Framework\Modules\Core\Services\FileService;
 use Illuminate\Console\Command;
 
 class Install extends Command
@@ -33,16 +33,11 @@ class Install extends Command
 	 */
 	protected string $envPath;
 
-	protected CopyService $copyService;
+	protected FileService $fileService;
 
-	/**
-	 * Create a new command instance.
-	 *
-	 * @param CopyService $copyService
-	 */
-	public function __construct(CopyService $copyService)
+	public function __construct(FileService $fileService)
 	{
-		$this->copyService = $copyService;
+		$this->fileService = $fileService;
 
 		parent::__construct();
 	}
@@ -83,7 +78,7 @@ class Install extends Command
 
 	protected function copyFile()
 	{
-		$this->copyService->from($this->envExamplePath)
+		$this->fileService->from($this->envExamplePath)
 		                  ->to($this->envPath)
 		                  ->copy();
 	}

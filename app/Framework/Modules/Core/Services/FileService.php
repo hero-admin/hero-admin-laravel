@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Framework\Modules\Core\Services\File;
 
-class CopyService
+namespace App\Framework\Modules\Core\Services;
+
+
+class FileService
+
 {
 	/**
 	 * @var string
@@ -17,7 +20,7 @@ class CopyService
 	/**
 	 * @param string $from
 	 *
-	 * @return CopyService
+	 * @return FileService
 	 */
 	public function from(string $from): static
 	{
@@ -28,7 +31,7 @@ class CopyService
 	/**
 	 * @param string $to
 	 *
-	 * @return CopyService
+	 * @return FileService
 	 */
 	public function to(string $to): static
 	{
