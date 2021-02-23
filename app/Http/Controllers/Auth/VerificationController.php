@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
-use framework\Modules\Core\Service\UserService;
-use framework\Modules\Core\Service\VerificationService;
+use Framework\Modules\Core\Service\File\UserService;
+use Framework\Modules\Core\Service\File\VerificationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace Framework\Modules\Core\Service;
 
 use Endroid\QrCode\QrCode;
 
