@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\HeroApp;
 
+use Framework\Modules\Core\Service\File\CopyService;
 use Illuminate\Console\Command;
 
 class Install extends Command
@@ -22,12 +23,26 @@ class Install extends Command
 	protected $description = 'Install Hero APP';
 
 	/**
+	 * @var string
+	 */
+	protected string $envExamplePath;
+
+	/**
+	 * @var string
+	 */
+	protected string $envPath;
+
+	protected CopyService $copyService;
+
+	/**
 	 * Create a new command instance.
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct(CopyService $copyService)
 	{
+		$this->copyService = $copyService;
+
 		parent::__construct();
 	}
 
@@ -57,16 +72,19 @@ class Install extends Command
 	{
 		$this->info('Copy .env file...');
 
-		$envPath        = base_path('.env');
-		$envExamplePath = base_path('.env.example');
+		$this->envPath        = base_path('.env');
+		$this->envExamplePath = base_path('.env.example');
 
-		if (file_exists($envPath)) {
-			$this->confirm('The file already exists, do you want to continue?')
-				? copy($envExamplePath, $envPath)
-				: null;
-		} else {
-			copy($envExamplePath, $envPath);
-		}
+		file_exists($this->envPath)
+			? $this->confirm('The file already exists, do you want to continue?') & $this->copyFile()
+			: $this->copyFile();
+	}
+
+	protected function copyFile()
+	{
+		$this->copyService->from($this->envExamplePath)
+		                  ->to($this->envPath)
+		                  ->copy();
 	}
 
 	private function generateKey(): void
@@ -77,9 +95,7 @@ class Install extends Command
 
 	private function migrate(): void
 	{
-		$this->confirm('Migrate the table?')
-			? $this->migrateTable()
-			: null;
+		$this->confirm('Migrate the table?') & $this->migrateTable();
 	}
 
 	protected function migrateTable(): void
@@ -90,9 +106,7 @@ class Install extends Command
 
 	private function seed(): void
 	{
-		$this->confirm('Seed the data to table?')
-			? $this->seedTable()
-			: null;
+		$this->confirm('Seed the data to table?') & $this->seedTable();
 	}
 
 	protected function seedTable(): void
