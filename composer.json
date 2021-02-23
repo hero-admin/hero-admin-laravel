@@ -11,6 +11,7 @@
     "php": "^8.0",
     "ext-pdo": "*",
     "darkaonline/l5-swagger": "^8.0",
+    "endroid/qr-code": "^3.9",
     "fideloper/proxy": "^4.4",
     "fruitcake/laravel-cors": "^2.0",
     "guzzlehttp/guzzle": "^7.0.1",
