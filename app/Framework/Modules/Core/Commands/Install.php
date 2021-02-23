@@ -77,7 +77,7 @@ class Install extends Command
 		$this->envExamplePath = base_path('.env.example');
 
 		file_exists($this->envPath)
-			? $this->confirm('The file already exists, do you want to continue?') & $this->copyFile()
+			? $this->confirm('The file already exists, do you want to continue?') && $this->copyFile()
 			: $this->copyFile();
 	}
 
@@ -96,7 +96,7 @@ class Install extends Command
 
 	private function migrate(): void
 	{
-		$this->confirm('Migrate the table?') & $this->migrateTable();
+		$this->confirm('Migrate the table?') && $this->migrateTable();
 	}
 
 	protected function migrateTable(): void
@@ -107,7 +107,7 @@ class Install extends Command
 
 	private function seed(): void
 	{
-		$this->confirm('Seed the data to table?') & $this->seedTable();
+		$this->confirm('Seed the data to table?') && $this->seedTable();
 	}
 
 	protected function seedTable(): void
