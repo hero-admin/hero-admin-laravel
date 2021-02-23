@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Framework\Modules\Core\Services\UserService;
+use App\Framework\Modules\Core\Services\VerificationService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
-use Framework\Modules\Core\Services\UserService;
-use Framework\Modules\Core\Services\VerificationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

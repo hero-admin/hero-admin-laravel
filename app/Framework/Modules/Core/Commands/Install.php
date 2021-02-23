@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Console\Commands\HeroApp;
+namespace App\Framework\Modules\Core\Commands;
 
-use Framework\Modules\Core\Services\File\CopyService;
+use App\Framework\Modules\Core\Services\File\CopyService;
 use Illuminate\Console\Command;
 
 class Install extends Command
+
 {
 	/**
 	 * The name and signature of the console command.
@@ -37,7 +38,7 @@ class Install extends Command
 	/**
 	 * Create a new command instance.
 	 *
-	 * @return void
+	 * @param CopyService $copyService
 	 */
 	public function __construct(CopyService $copyService)
 	{

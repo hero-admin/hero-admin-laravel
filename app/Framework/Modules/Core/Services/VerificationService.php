@@ -1,8 +1,8 @@
 <?php
 
-namespace Framework\Modules\Core\Services;
+namespace App\Framework\Modules\Core\Services;
 
-use Framework\Modules\Core\Repositories\UserRepository;
+use App\Framework\Modules\Core\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
 
 class VerificationService

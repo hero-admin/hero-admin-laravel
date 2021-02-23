@@ -3,7 +3,7 @@
   "type": "project",
   "description": "The Laravel Framework.",
   "keywords": [
-    "framework",
+    "app/Framework",
     "laravel"
   ],
   "license": "MIT",
@@ -41,7 +41,6 @@
   "autoload": {
     "psr-4": {
       "App\\": "app/",
-      "Framework\\": "framework/",
       "Database\\Factories\\": "database/factories/",
       "Database\\Seeders\\": "database/seeders/"
     }
