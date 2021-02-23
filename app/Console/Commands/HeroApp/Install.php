@@ -40,9 +40,9 @@ class Install extends Command
 	{
 		$this->info('Install Hero APP...');
 
-		$this->copy_env();
+		$this->copyEnv();
 
-		$this->generate_key();
+		$this->generateKey();
 
 		$this->migrate();
 
@@ -53,41 +53,51 @@ class Install extends Command
 		return 0;
 	}
 
-	private function copy_env(): void
+	private function copyEnv(): void
 	{
 		$this->info('Copy .env file...');
-		exec('php -r "file_exists(\'.env\') || copy(\'.env.example\', \'.env\');"');
+
+		$envPath        = base_path('.env');
+		$envExamplePath = base_path('.env.example');
+
+		if (file_exists($envPath)) {
+			$this->confirm('The file already exists, do you want to continue?')
+				? copy($envExamplePath, $envPath)
+				: null;
+		} else {
+			copy($envExamplePath, $envPath);
+		}
 	}
 
-	private function generate_key(): void
+	private function generateKey(): void
 	{
 		$this->info('Generate app key...');
-		exec('php artisan key:generate --ansi');
+		$this->call('key:generate');
 	}
 
 	private function migrate(): void
 	{
 		$this->confirm('Migrate the table?')
-			? $this->migrate_table()
+			? $this->migrateTable()
 			: null;
 	}
 
-	protected function migrate_table(): void
+	protected function migrateTable(): void
 	{
 		$this->info('Migrate all table...');
-		exec('php artisan migrate');
+		$this->call('migrate');
 	}
 
 	private function seed(): void
 	{
 		$this->confirm('Seed the data to table?')
-			? $this->seed_table()
+			? $this->seedTable()
 			: null;
 	}
 
-	protected function seed_table(): void
+	protected function seedTable(): void
 	{
 		$this->info('Seed all data...');
-		exec('php artisan db:seed');
+		$this->call('db:seed');
 	}
 }
