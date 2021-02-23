@@ -1,6 +1,6 @@
 <?php
 
-namespace framework\Modules\Core\Repository;
+namespace Framework\Modules\Core\Repository;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
