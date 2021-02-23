@@ -1,6 +1,6 @@
 <?php
 
-namespace Framework\Modules\Core\Service\File;
+namespace Framework\Modules\Core\Services\File;
 
 class CopyService
 {

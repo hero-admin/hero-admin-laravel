@@ -1,8 +1,8 @@
 <?php
 
-namespace Framework\Modules\Core\Service;
+namespace Framework\Modules\Core\Services;
 
-use Framework\Modules\Core\Repository\UserRepository;
+use Framework\Modules\Core\Repositories\UserRepository;
 
 class UserService
 {

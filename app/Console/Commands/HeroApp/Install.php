@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands\HeroApp;
 
-use Framework\Modules\Core\Service\File\CopyService;
+use Framework\Modules\Core\Services\File\CopyService;
 use Illuminate\Console\Command;
 
 class Install extends Command
